@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://bsa45u2m0kt5g"]
+
+[ext_resource type="PackedScene" uid="uid://bn4bucnpsj05f" path="res://Scenes/Player/player.tscn" id="1_5riid"]
+[ext_resource type="Script" path="res://Scenes/Levels/main.gd" id="1_v0eb5"]
+[ext_resource type="Texture2D" uid="uid://cf8h774y0r22u" path="res://Graphics/ground/stones.png" id="2_y400m"]
+[ext_resource type="Texture2D" uid="uid://c6nw7te2yekbw" path="res://Graphics/tilesets/outside_walls.png" id="3_05jkw"]
+[ext_resource type="PackedScene" uid="uid://cs16lyqorh5o4" path="res://Scenes/Obstacles/building.tscn" id="4_0f22e"]
+[ext_resource type="Texture2D" uid="uid://8apbbl6fcckf" path="res://Graphics/tilesets/soil.png" id="4_bd8vv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_63gex"]
+resource_name = "Walls"
+texture = ExtResource("3_05jkw")
+texture_region_size = Vector2i(390, 390)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lqsq3"]
+resource_name = "Soil"
+texture = ExtResource("4_bd8vv")
+texture_region_size = Vector2i(390, 390)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_4ijh2"]
+tile_size = Vector2i(390, 390)
+sources/0 = SubResource("TileSetAtlasSource_63gex")
+sources/1 = SubResource("TileSetAtlasSource_lqsq3")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_v0eb5")
+
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="Stones" type="Sprite2D" parent="Ground"]
+texture_repeat = 2
+texture = ExtResource("2_y400m")
+region_enabled = true
+region_rect = Rect2(0, 0, 10000, 10000)
+
+[node name="TileMap" type="TileMap" parent="Ground"]
+tile_set = SubResource("TileSet_4ijh2")
+format = 2
+layer_0/name = "Soil"
+layer_0/tile_data = PackedInt32Array(196605, 65537, 1, 196606, 65537, 1, 262142, 65537, 1, 262141, 65537, 1, 262143, 65537, 1, 327678, 65537, 1, 327677, 65537, 1, 327679, 65537, 1, 393214, 65537, 1, 393213, 65537, 1, 327676, 65537, 1, 262140, 65537, 1, 589821, 65537, 1, 524285, 65537, 1, 524286, 65537, 1, 458749, 65537, 1, 393215, 65537, 1, 262144, 65537, 1, 262146, 65537, 1, 262145, 65537, 1, 196608, 65537, 1, 196607, 65537, 1, 327675, 65537, 1, 327674, 65537, 1, 327673, 65537, 1, 393209, 65537, 1, 458745, 65537, 1, 524281, 65537, 1, 262139, 65537, 1, 262138, 65537, 1, 262137, 65537, 1, 262136, 65537, 1, 196600, 65537, 1, 196601, 65537, 1, 196604, 65537, 1, 131067, 65537, 1, 196603, 65537, 1, 65531, 65537, 1, 393212, 1, 1, 655356, 1, 2, 589820, 1, 1, 524284, 1, 1, 458748, 1, 1, 655357, 131073, 2, 589822, 131073, 2, 524287, 131073, 2, 458751, 131073, 1, 458750, 65537, 1, 327680, 131073, 2, 262147, 131073, 1, 196609, 131073, 0, 131063, 1, 0, 131064, 65537, 0, 131065, 65537, 0, 196599, 1, 1, 196602, 65537, 0, 262135, 1, 1, 327671, 1, 2, 327672, 65537, 1, 589817, 65537, 2, 589818, 131073, 2, 589816, 1, 2, 524282, 131073, 1, 458746, 131073, 1, 393210, 131073, 1, 524280, 1, 1, 458744, 1, 1, 393208, 1, 1)
+layer_1/name = "Walls"
+layer_1/tile_data = PackedInt32Array(-65528, 65536, 1, -65527, 131072, 1, 65545, 0, 2, 65544, 0, 2, 131080, 0, 2, 131081, 0, 2, 196617, 65536, 2, 196618, 131072, 1, 262154, 131072, 2, 262153, 65536, 2, 262152, 131072, 2, 262151, 65536, 2, 196615, 65536, 1, 196616, 131072, 2, 131063, 65536, 1, 131064, 65536, 0, 196599, 0, 2, 262135, 0, 2, 327672, 131072, 1, 458744, 0, 2, 524280, 0, 2, 589816, 0, 3, 589818, 0, 3, 524282, 0, 2, 393210, 0, 2, 327674, 65536, 1, 327675, 65536, 0, 327676, 131072, 1, 393212, 0, 2, 458748, 0, 2, 524284, 0, 2, 589820, 0, 2, 655356, 65536, 2, 655357, 131072, 2, 589821, 65536, 1, 589822, 131072, 2, 524286, 65536, 1, 524287, 131072, 2, 458751, 0, 2, 393215, 65536, 1, 327680, 131072, 2, 262144, 0, 2, 196608, 131072, 1, 262143, 65536, 2, 196607, 131072, 1, 196606, 65536, 0, 196605, 65536, 0, 196604, 65536, 0, 196603, 65536, 0, 196602, 65536, 0, 196601, 65536, 2, 131065, 131072, 1, 458746, 0, 2, 393208, 0, 2, 327671, 65536, 2, 9, 0, 2, 8, 0, 2)
+
+[node name="Player" parent="." instance=ExtResource("1_5riid")]
+position = Vector2(544, 383)
+
+[node name="Building" parent="." instance=ExtResource("4_0f22e")]
+position = Vector2(504, -546)

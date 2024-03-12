@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bn4bucnpsj05f"]
+
+[ext_resource type="Texture2D" uid="uid://wnm0ni7c0bar" path="res://Graphics/player/player.png" id="1_bsuu8"]
+[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_hhkye"]
+[ext_resource type="Script" path="res://Scenes/Player/Firing Point.gd" id="3_m3p3j"]
+[ext_resource type="PackedScene" uid="uid://18afmpailgim" path="res://Scenes/Projectiles/lazer.tscn" id="4_r0ec8"]
+[ext_resource type="Script" path="res://Scenes/Player/Throwing Point.gd" id="5_wquv5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yowoc"]
+radius = 60.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_hhkye")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(43, 4)
+rotation = 1.48353
+texture = ExtResource("1_bsuu8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yowoc")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+
+[node name="Throwing Point" type="Marker2D" parent="."]
+position = Vector2(94, -60)
+script = ExtResource("5_wquv5")
+
+[node name="Grenade Timer" type="Timer" parent="Throwing Point"]
+wait_time = 0.1
+
+[node name="Firing Point" type="Node2D" parent="."]
+position = Vector2(123, 13)
+script = ExtResource("3_m3p3j")
+lazer_scene = ExtResource("4_r0ec8")
+
+[node name="Lazer Cooldown" type="Timer" parent="Firing Point"]
+wait_time = 0.001
+one_shot = true
+
+[connection signal="timeout" from="Throwing Point/Grenade Timer" to="Throwing Point" method="_on_grenade_timer_timeout"]
+[connection signal="timeout" from="Firing Point/Lazer Cooldown" to="Firing Point" method="_on_lazer_cooldown_timeout"]

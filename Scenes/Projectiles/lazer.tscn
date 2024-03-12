@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://18afmpailgim"]
+
+[ext_resource type="Script" path="res://Scenes/Projectiles/lazer.gd" id="1_bbmjh"]
+[ext_resource type="Texture2D" uid="uid://cvtx53judmg6y" path="res://Graphics/projectiles/blue.png" id="1_x1uf8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ih48m"]
+radius = 7.0
+height = 86.0
+
+[node name="lazer" type="Area2D"]
+script = ExtResource("1_bbmjh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 38)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("1_x1uf8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ih48m")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
